@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { login, register } from "../services/authService";
+import { login, register } from "../services/authenticationService";
 
 export default function AuthScreen() {
     const [activeTab, setActiveTab] = useState("login"); // or "register"
@@ -51,9 +51,9 @@ export default function AuthScreen() {
     const handleRegister = async () => {
         try {
             await register({ name, email, password, role });
-            Alert.alert("Registration successful", "User created successfully.");
+            Alert.alert("Registration successful", "User created successfully");
         } catch (error) {
-            Alert.alert("Registration failed", "Check the data or try a different email.");
+            Alert.alert("Registration failed", "Check the data or try a different email");
             console.error(error);
         }
     };

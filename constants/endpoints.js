@@ -1,12 +1,15 @@
 const API_ENDPOINTS = {
-    auth: {
-        login: "/auth/login",
-        register: "/auth/register",
+    authentication: {
+        login: "/authentication/login",
+        register: "/authentication/register",
     },
-    classrooms: {
-        create: "/classrooms",
-        owned: "/classrooms/owned",
-        join: "/classrooms/join",
+    student: {
+        join: "/student/classrooms/join",
+        list: "/student/classrooms/list",
+    },
+    teacher: {
+        new: "/teacher/classrooms/new",
+        own: "/teacher/classrooms/own",
     },
 };
 

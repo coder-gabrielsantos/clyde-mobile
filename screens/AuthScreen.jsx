@@ -7,6 +7,8 @@ import {
     TouchableOpacity,
     View,
 } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 import { login, register } from "../services/authService";
 
 export default function AuthScreen() {
@@ -16,6 +18,8 @@ export default function AuthScreen() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [role, setRole] = useState("STUDENT"); // or "TEACHER"
+
+    const navigation = useNavigation();
 
     useEffect(() => {
         if (activeTab === "login") {
@@ -32,10 +36,14 @@ export default function AuthScreen() {
     const handleLogin = async () => {
         try {
             const { token } = await login({ email, password });
-            Alert.alert("Login successful", `Token: ${token}`);
-            // TODO: store token and navigate
+
+            // Save token to AsyncStorage
+            await AsyncStorage.setItem("token", token);
+
+            // Navigate to Home
+            navigation.replace("Home");
         } catch (error) {
-            Alert.alert("Login failed", "Invalid credentials.");
+            Alert.alert("Login failed", "Invalid credentials");
             console.error(error);
         }
     };

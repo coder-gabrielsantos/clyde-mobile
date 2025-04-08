@@ -25,7 +25,7 @@ clyde-mobile-js/
 │   └── AuthScreen.js          # Login/Register UI
 ├── services/
 │   ├── api.js                 # Axios instance
-│   └── authenticationService.js         # Login/Register calls
+│   └── authService.js         # Login/Register calls
 ├── constants/
 │   └── endpoints.js           # Centralized API paths
 └── assets/                    # (Optional) images/icons/fonts
@@ -130,7 +130,7 @@ baseURL: "http://192.168.x.x:8080", // For physical devices (same Wi-Fi network)
 
 ## 🧠 Clean Code Practices
 
-- Services abstracted via `authenticationService.js`
+- Services abstracted via `authService.js`
 - Centralized endpoints in `endpoints.js`
 - Authentication logic is isolated from UI
 - Modern UI with style encapsulation via `StyleSheet`

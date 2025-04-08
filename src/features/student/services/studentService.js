@@ -1,5 +1,5 @@
-import api from "./api";
-import endpoints from "../constants/endpoints";
+import api from "../../../shared/api";
+import endpoints from "../../../shared/constants/endpoints";
 
 export const joinClassroom = async (payload) => {
     const response = await api.post(endpoints.student.join, payload);

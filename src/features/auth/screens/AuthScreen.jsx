@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { login, register } from "../services/authenticationService";
+import { login, register } from "../services/authService";
 
 export default function AuthScreen() {
     const [activeTab, setActiveTab] = useState("login"); // or "register"

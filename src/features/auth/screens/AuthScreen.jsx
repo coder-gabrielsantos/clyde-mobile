@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import { decodeToken } from "../../../shared/utils/jwt";
 import { login, register } from "../services/authService";
 
 export default function AuthScreen() {
@@ -37,13 +38,26 @@ export default function AuthScreen() {
         try {
             const { token } = await login({ email, password });
 
-            // Save token to AsyncStorage
-            await AsyncStorage.setItem("token", token);
+            const payload = decodeToken(token);
+            const role = payload?.role;
 
-            // Navigate to Home
-            navigation.replace("Home");
+            if (!role) throw new Error("Role not found in token");
+
+            // Save token and role
+            await AsyncStorage.setItem("token", token);
+            await AsyncStorage.setItem("role", role);
+
+            if (role === "TEACHER") {
+                navigation.replace("TeacherDashboard");
+
+            } else if (role === "STUDENT") {
+                navigation.replace("StudentDashboard");
+
+            } else {
+                throw new Error("Unknown role");
+            }
         } catch (error) {
-            Alert.alert("Login failed", "Invalid credentials");
+            Alert.alert("Login failed", "Invalid credentials or role");
             console.error(error);
         }
     };
